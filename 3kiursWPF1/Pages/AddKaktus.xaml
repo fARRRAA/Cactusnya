@@ -1,0 +1,38 @@
+﻿<Window x:Class="_3kiursWPF1.Pages.AddKaktus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3kiursWPF1.Pages"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="AddKaktus" Height="650" Width="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,26,0,24" Grid.RowSpan="3" Grid.Column="1">
+            <TextBlock Text="Добавление кактуса " FontSize="20px" Margin="0,0,0,10" HorizontalAlignment="Center" Foreground="Red"/>
+            <TextBlock Text="Имя " FontSize="16px" HorizontalAlignment="Center"/>
+            <TextBox Height="40px" FontSize="16px" x:Name="NameKaktus"/>
+            <TextBlock Text="Вид кактуса" FontSize="16px" HorizontalAlignment="Center"/>
+            <TextBox Height="40px" FontSize="16px" x:Name="TypeKaktus"/>
+            <TextBlock Text="Цена" FontSize="16px" HorizontalAlignment="Center"/>
+            <TextBox Height="40px" FontSize="16px" x:Name="PriceKaktus"/>
+            <TextBlock Text="Возраст" FontSize="16px" HorizontalAlignment="Center" Margin="149,0"/>
+            <TextBox Height="40px" FontSize="16px" x:Name="AgeKaktus"/>
+            <TextBlock Text="Происхождение" FontSize="16px" HorizontalAlignment="Center"/>
+            <TextBox Height="40px" FontSize="16px" x:Name="OtkudaKaktus"/>
+            <TextBlock Text="Инструкция" FontSize="16px" HorizontalAlignment="Center"/>
+            <TextBox Height="40px" FontSize="16px" x:Name="InfoKaktus"/>
+            <Button Content="Добавить" Width="100px" FontSize="16px" Margin="0,12,0,0" x:Name="ButtonAdd" Click="ButtonAdd_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

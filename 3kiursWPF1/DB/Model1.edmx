@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище WPFKOURS1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="Id_Collection" />
+          </Key>
+          <Property Name="Id_Collection" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Vystavka" Type="int" Nullable="false" />
+          <Property Name="Id_Kaktus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kaktus">
+          <Key>
+            <PropertyRef Name="Id_kaktus" />
+          </Key>
+          <Property Name="Id_kaktus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Type" Type="int" Nullable="false" />
+          <Property Name="Otkuda" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Uhod" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="Id_Login" />
+          </Key>
+          <Property Name="Id_Login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_User" Type="int" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id_Type" />
+          </Key>
+          <Property Name="Id_Type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Vystavka">
+          <Key>
+            <PropertyRef Name="Id_Vystavka" />
+          </Key>
+          <Property Name="Id_Vystavka" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Mesto" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Collection_Kaktus">
+          <End Role="Kaktus" Type="Self.Kaktus" Multiplicity="1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kaktus">
+              <PropertyRef Name="Id_kaktus" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="Id_Kaktus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Vystavka">
+          <End Role="Vystavka" Type="Self.Vystavka" Multiplicity="1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vystavka">
+              <PropertyRef Name="Id_Vystavka" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="Id_Vystavka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kaktus_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Kaktus" Type="Self.Kaktus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id_Type" />
+            </Principal>
+            <Dependent Role="Kaktus">
+              <PropertyRef Name="Id_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logins_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Logins" Type="Self.Logins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Logins">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище WPFKOURS1ModelContainer">
+          <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kaktus" EntityType="Self.Kaktus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vystavka" EntityType="Self.Vystavka" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Collection_Kaktus" Association="Self.FK_Collection_Kaktus">
+            <End Role="Kaktus" EntitySet="Kaktus" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Vystavka" Association="Self.FK_Collection_Vystavka">
+            <End Role="Vystavka" EntitySet="Vystavka" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kaktus_Type" Association="Self.FK_Kaktus_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Kaktus" EntitySet="Kaktus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logins_Users" Association="Self.FK_Logins_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Logins" EntitySet="Logins" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WPFKOURS1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="Id_Collection" />
+          </Key>
+          <Property Name="Id_Collection" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Vystavka" Type="Int32" Nullable="false" />
+          <Property Name="Id_Kaktus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kaktus" Relationship="Self.FK_Collection_Kaktus" FromRole="Collection" ToRole="Kaktus" />
+          <NavigationProperty Name="Vystavka" Relationship="Self.FK_Collection_Vystavka" FromRole="Collection" ToRole="Vystavka" />
+        </EntityType>
+        <EntityType Name="Kaktus">
+          <Key>
+            <PropertyRef Name="Id_kaktus" />
+          </Key>
+          <Property Name="Id_kaktus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Type" Type="Int32" Nullable="false" />
+          <Property Name="Otkuda" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Uhod" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Collection" Relationship="Self.FK_Collection_Kaktus" FromRole="Kaktus" ToRole="Collection" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Kaktus_Type" FromRole="Kaktus" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="Id_Login" />
+          </Key>
+          <Property Name="Id_Login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Logins_Users" FromRole="Logins" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id_Type" />
+          </Key>
+          <Property Name="Id_Type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kaktus" Relationship="Self.FK_Kaktus_Type" FromRole="Type" ToRole="Kaktus" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK_Logins_Users" FromRole="Users" ToRole="Logins" />
+        </EntityType>
+        <EntityType Name="Vystavka">
+          <Key>
+            <PropertyRef Name="Id_Vystavka" />
+          </Key>
+          <Property Name="Id_Vystavka" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Mesto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Collection" Relationship="Self.FK_Collection_Vystavka" FromRole="Vystavka" ToRole="Collection" />
+        </EntityType>
+        <Association Name="FK_Collection_Kaktus">
+          <End Role="Kaktus" Type="Self.Kaktus" Multiplicity="1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kaktus">
+              <PropertyRef Name="Id_kaktus" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="Id_Kaktus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Vystavka">
+          <End Role="Vystavka" Type="Self.Vystavka" Multiplicity="1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vystavka">
+              <PropertyRef Name="Id_Vystavka" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="Id_Vystavka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kaktus_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Kaktus" Type="Self.Kaktus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id_Type" />
+            </Principal>
+            <Dependent Role="Kaktus">
+              <PropertyRef Name="Id_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logins_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Logins" Type="Self.Logins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Logins">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WPFKOURS1Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Collection" EntityType="Self.Collection" />
+          <EntitySet Name="Kaktus" EntityType="Self.Kaktus" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Vystavka" EntityType="Self.Vystavka" />
+          <AssociationSet Name="FK_Collection_Kaktus" Association="Self.FK_Collection_Kaktus">
+            <End Role="Kaktus" EntitySet="Kaktus" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Vystavka" Association="Self.FK_Collection_Vystavka">
+            <End Role="Vystavka" EntitySet="Vystavka" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kaktus_Type" Association="Self.FK_Kaktus_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Kaktus" EntitySet="Kaktus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logins_Users" Association="Self.FK_Logins_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Logins" EntitySet="Logins" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище WPFKOURS1ModelContainer" CdmEntityContainer="WPFKOURS1Entities2">
+          <EntitySetMapping Name="Collection">
+            <EntityTypeMapping TypeName="WPFKOURS1Model.Collection">
+              <MappingFragment StoreEntitySet="Collection">
+                <ScalarProperty Name="Id_Collection" ColumnName="Id_Collection" />
+                <ScalarProperty Name="Id_Vystavka" ColumnName="Id_Vystavka" />
+                <ScalarProperty Name="Id_Kaktus" ColumnName="Id_Kaktus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kaktus">
+            <EntityTypeMapping TypeName="WPFKOURS1Model.Kaktus">
+              <MappingFragment StoreEntitySet="Kaktus">
+                <ScalarProperty Name="Id_kaktus" ColumnName="Id_kaktus" />
+                <ScalarProperty Name="Id_Type" ColumnName="Id_Type" />
+                <ScalarProperty Name="Otkuda" ColumnName="Otkuda" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Uhod" ColumnName="Uhod" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="WPFKOURS1Model.Logins">
+              <MappingFragment StoreEntitySet="Logins">
+                <ScalarProperty Name="Id_Login" ColumnName="Id_Login" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WPFKOURS1Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type">
+            <EntityTypeMapping TypeName="WPFKOURS1Model.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="Id_Type" ColumnName="Id_Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WPFKOURS1Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vystavka">
+            <EntityTypeMapping TypeName="WPFKOURS1Model.Vystavka">
+              <MappingFragment StoreEntitySet="Vystavka">
+                <ScalarProperty Name="Id_Vystavka" ColumnName="Id_Vystavka" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Mesto" ColumnName="Mesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
